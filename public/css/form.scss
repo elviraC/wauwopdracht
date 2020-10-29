@@ -1,0 +1,87 @@
+.form-template{
+  color: black;
+  background: $formBackgroundColorOne;
+  margin: 10px;
+
+  .form-text{
+    max-width: 750px;
+    margin: 40px;
+
+    &__title{
+      font-size: 4rem;
+      color: $formTextColor;
+      margin-bottom: 20px;
+
+      @media ( max-width: $breakpointMobile1 ){
+        font-size:2.5rem;
+      }
+
+      @media screen and( min-width: $breakpointMobile1 ) and ( max-width: $breakpointMobile2 ){
+        font-size:3rem;
+      }
+    }
+
+    &__description{
+      margin-bottom: 40px;
+      font-size: 14px;
+      line-height: 1.4rem;
+      color: $formTextColorLight;
+    }
+
+    & .message{
+      background: $gradientColor2;
+      line-height: 2rem;
+      font-weight: 500;
+      color: black;
+      margin-bottom: 30px;
+    }
+  }
+
+  .form{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+
+    .form-buttons{  margin-top: 20px;   }
+
+    .form-field{
+        padding: 10px 0px 10px 0px;
+
+        &.required label:after{
+          color: red;
+          width: 30px;
+          height: 30px;
+          right: -5px;
+          position: relative;
+          content: "*";
+        }
+        
+        label{
+          position: relative;
+          display: block;
+          font-weight: 500;
+          letter-spacing: 1px;
+          margin-bottom: 3px;
+        }
+
+        input,select,textarea{
+          border: 2px solid white;
+          border-radius: 4px;
+          padding-left: 10px;
+        }
+
+        input, select{  height: 40px;   }
+
+        input, textarea{
+          width: 100%;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+
+        input[type="submit"]{  margin-top: 30px;  }
+
+        textarea{  min-height: 100px;   }
+    }
+  }
+}
