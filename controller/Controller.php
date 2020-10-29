@@ -7,19 +7,13 @@ class WebFormController {
 
 	public function __construct($model) {
 		$this->model = $model;
+		$this->insertBool = false;
 	}
 
-
-	/**
-	*	When data has been inserted into DB, send an email to user and owner.
-	**/
-	public function send(){
-		if($_SESSION['email']){
-			$this->model->setMessage('Your message has been send');
-			$contactController = new ContactController();
-			$contactController->sendMail();
-		}
+	public function setInsert($value){
+		$this->insertBool = $value;
 	}
+
 
 	/**
 	*  User pressed submit button, call insert function to insert data in DB
@@ -28,6 +22,8 @@ class WebFormController {
 	public function submit($request) {
 		if (isset($request['submit'])) {
      $this->insert($request);
+		 $this->model->setMessage("test");
+		 echo "message:".$this->model->message;
 		}
 	}
 
@@ -46,9 +42,12 @@ class WebFormController {
 	* @param string $email -> Value of Emailaddress from form.
 	* @param string $message -> Content of message from form.
 	**/
-	public function setSession($email, $message){
+	public function setSession($email, $message, $name, $subscription){
 			$_SESSION["email"] = $email;
 			$_SESSION["message"] = $message;
+			$_SESSION["name"] = $name;
+			$_SESSION["subscription"] = $subscription;
+	  	$_SESSION["send_mail_to_user"] = false;
 	}
 
 	/**
@@ -66,7 +65,7 @@ class WebFormController {
 
 	    // insert values in database
 	    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-	    $dateToday = date('YYYY-mm-dd', time());
+	    $dateToday =Date('Y-m-d h:i:s', time());
 
 	    // set the PDO error mode to exception
 	    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -79,14 +78,14 @@ class WebFormController {
 	    $message = $_POST['message'];
 
 	    $stmt->execute([$name,$email, $subscription, $message, $dateToday]);
-			$this->setSession($email, $message);
+			$this->setSession($email, $message, $name, $subscription);
 
 			if($stmt->rowCount()>0){
-				$this->redirect("wauwtestcase/?action=send");
+				$this->setInsert(true);
+				$this->redirect("wauwtestcase/message_send.php");
 			}
-
     } catch(PDOException $e) {
-			$conn->rollback();
+			$conn->rollBack();
       echo $stmt . "<br>" . $e->getMessage();
     }
   }

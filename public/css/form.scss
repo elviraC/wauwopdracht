@@ -3,6 +3,24 @@
   background: $formBackgroundColorOne;
   margin: 10px;
 
+  .message-confirmed{
+    background:white;
+    margin-left:20px;
+    margin-right:20px;
+    // margin-left:auto;
+    // margin-right:auto;
+    margin-bottom:20px;
+    padding:20px;
+
+    &__row{
+        margin-bottom:20px;
+
+        .confirmed-field{
+          font-weight:500;
+        }
+    }
+  }
+
   .form-text{
     max-width: 750px;
     margin: 40px;
@@ -55,7 +73,7 @@
           position: relative;
           content: "*";
         }
-        
+
         label{
           position: relative;
           display: block;
@@ -84,4 +102,6 @@
         textarea{  min-height: 100px;   }
     }
   }
+
+
 }

@@ -46,7 +46,7 @@ public function printBeginForm(){
      <h1 class="form-text__title">'.$this->form->getFormTitle().'</h1>
      <div class="form-text__description">'.$this->form->getFormText().'</div>
 
-     <div class="message">'.$this->form->getMessage().'</div>
+     <div class="message">'.$this->form->message.'</div>
     </div>
     <form action="?action=submit" method="post" id="'.$this->form->formName.'" class="form">
   ';
